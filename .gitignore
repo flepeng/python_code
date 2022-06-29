@@ -1,0 +1,38 @@
+# python
+__pycache__
+
+# Mac OS X files
+.DS_Store
+
+# test
+.pytest_cache
+.coverage
+html_cov/
+htmlcov/
+.mutmut-cache
+mutmut.xml
+*.test
+dev.py
+
+.pytype_output
+
+# editor
+*.swp
+.idea
+.vscode
+
+# logs
+*.log
+
+# bin data
+*.db
+*.sqlite3
+
+# migrations
+migrations
+
+# environments config
+config.ini
+video
+video_rar
+cache
