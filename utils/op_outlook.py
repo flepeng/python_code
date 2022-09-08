@@ -2,7 +2,7 @@
 """
     @Time  : 2022/2/22  14:39
     @Author: Feng Lepeng
-    @File  : outlook.py
+    @File  : op_outlook.py
     @Desc  :
 """
 import base64
@@ -53,7 +53,7 @@ class OutlookHtml(object):
             'test': "",
         }
 
-        ret = render_template('megvul/email/23.html', render_dict=render_dict)
+        ret = render_template('./23.html', render_dict=render_dict)
 
         return ret, self.msgImage_list
 

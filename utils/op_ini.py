@@ -1,4 +1,10 @@
-# coding:utf-8
+# -*- coding:utf-8 -*-
+"""
+    @Time  : 2022/5/19  15:57
+    @Author: Feng Lepeng
+    @File  :
+    @Desc  :
+"""
 import os
 import datetime
 import configparser
@@ -52,6 +58,79 @@ class OPConfig(object):
     def save_config(self):
         with open(self.file_name, "w+") as f:
             self.config.write(f)
+
+
+opc = OPConfig()
+
+
+class Config:
+    DEBUG = True
+    ENV_NAME = 'Default'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'hard to guess string'
+
+    # 自动 commit 提交到数据库
+    SQLALCHEMY_COMMIT_ON_TEARDOWN = True
+    SQLALCHEMY_TRACK_MODIFICATIONS = True
+
+    def __init__(self):
+        self.DINGTALK_AGENT_ID = opc.get_config(self.ENV_NAME, 'dingtalk_agent_id')
+        self.DINGTALK_APP_KEY = opc.get_config(self.ENV_NAME, 'dingtalk_app_key')
+        self.DINGTALK_APP_SECRET = opc.get_config(self.ENV_NAME, 'dingtalk_app_secret')
+        self.MYSQL_HOST = opc.get_config(self.ENV_NAME, 'mysql_host')
+        self.MYSQL_USER = opc.get_config(self.ENV_NAME, 'mysql_user')
+        self.MYSQL_PASSWD = opc.get_config(self.ENV_NAME, 'mysql_passwd')
+        self.MYSQL_DB = opc.get_config(self.ENV_NAME, 'mysql_db')
+        self.DINGTALK_APP_SECRET = opc.get_config(self.ENV_NAME, 'dingtalk_app_secret')
+        self.SQLALCHEMY_DATABASE_URI = f"mysql+pymysql://{self.MYSQL_USER}:{self.MYSQL_PASSWD}@{self.MYSQL_HOST}:3306/{self.MYSQL_DB}"
+
+        self.CMDB_MYSQL_HOST = opc.get_config("Default", 'cmdb_mysql_host')
+        self.CMDB_MYSQL_USER = opc.get_config("Default", 'cmdb_mysql_user')
+        self.CMDB_MYSQL_PASSWD = opc.get_config("Default", 'cmdb_mysql_passwd')
+        self.CMDB_MYSQL_DB = opc.get_config("Default", 'cmdb_mysql_db')
+
+        # sso 配置
+        self.USE_SSO = False if opc.get_config(self.ENV_NAME, 'use_sso') == 'false' else True  # 是否使用 sso
+        self.DEBUG_AS_USER = opc.get_config(self.ENV_NAME, 'debug_as_user')  # 不使用sso时，默认的登陆用户
+        self.LOCAL_IP = opc.get_config(self.ENV_NAME, 'local_ip')
+        self.SSO_LOGIN_CALLBACK_URL = "http://{}:{}/api/v1/auth/login_callback".format(self.LOCAL_IP, '8080')
+        self.SSO_LOGOUT_CALLBACK_URL = "http://{}:{}/api/v1/auth/logout_callback".format(self.LOCAL_IP, '8080')
+        self.SSO_CLIENT_ID = opc.get_config(self.ENV_NAME, 'sso_client_id')
+        self.SSO_CLIENT_SECRET = opc.get_config(self.ENV_NAME, 'sso_client_secret')
+
+
+class DevelopmentConfig(Config):
+    """
+    以开发模式的配置运行,并开启debug模式
+    """
+    DEBUG = True
+    ENV_NAME = 'Development'
+
+
+class TestingConfig(Config):
+    """
+    以开发模式的配置运行,并开启debug模式
+    """
+    DEBUG = True
+    ENV_NAME = 'Testing'
+
+
+class ProductionConfig(Config):
+    """
+    以生产模式的配置运行，关闭debug模式
+    """
+    DEBUG = False
+    ENV_NAME = 'Production'
+
+
+# 环境变量 ITINFO_ENV 两个参数 Development（开发）， Production（生产）, Testing（测试）
+if os.environ.get('ENV') == "Development":
+    conf = DevelopmentConfig()
+elif os.environ.get('ENV') == "Production":
+    conf = ProductionConfig()
+elif os.environ.get('ENV') == "Testing":
+    conf = TestingConfig()
+else:
+    conf = DevelopmentConfig()
 
 
 if __name__ == '__main__':

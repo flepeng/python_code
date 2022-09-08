@@ -6,6 +6,7 @@
     @Desc  : 官方提供的示例
 """
 import json
+import requests
 from typing import List
 
 from alibabacloud_dingtalk.robot_1_0.client import Client as dingtalkrobot_1_0Client
@@ -14,8 +15,31 @@ from alibabacloud_dingtalk.robot_1_0 import models as dingtalkrobot__1__0_models
 from alibabacloud_tea_util import models as util_models
 from alibabacloud_tea_util.client import Client as UtilClient
 
-from utils.mysql import MySQLCMDB
-from utils.dingtalk.self import DingTalkBase
+from utils.MySQL import MySQLLocal
+from utils.op_ini import conf
+
+
+class DingTalkBase(object):
+
+    def __init__(self):
+        self.app_id = conf.DINGTALK_AGENT_ID
+        self.app_key = conf.DINGTALK_APP_KEY
+        self.app_secret = conf.DINGTALK_APP_SECRET
+        self.access_token = ""
+        self.get_access_token()
+
+    def get_access_token(self):
+        """
+        获取 access token
+        :return:
+        """
+        url = "https://oapi.dingtalk.com/gettoken?appkey={}&appsecret={}".format(self.app_key, self.app_secret)
+        resp = requests.get(url)
+        if resp.json().get("errcode") == 0:
+            self.access_token = resp.json().get("access_token")
+            return
+        raise KeyError("发生错误")
+
 
 base = DingTalkBase()
 access_token = base.access_token
