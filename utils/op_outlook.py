@@ -32,28 +32,14 @@ class OutlookHtml(object):
             image_num += 1
         return handle_str, image_num
 
-    def create_23(self):
+    def create(self):
         """
         所有的漏洞
         :return:
         """
-        image_num = 0
+        render_dict = {}
 
-        render_dict = {
-            'owner': "",
-            'start_data': "",
-            'end_data': "",
-            'vul_total': 0,
-            'vul_import': 0,
-            'vul_high': 0,
-            'vul_medium': 0,
-            'vul_low': 0,
-            'vul_total_level': '',
-            'vul_list': [],
-            'test': "",
-        }
-
-        ret = render_template('./23.html', render_dict=render_dict)
+        ret = render_template('xxx.html', render_dict=render_dict)
 
         return ret, self.msgImage_list
 
