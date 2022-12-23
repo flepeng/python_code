@@ -43,13 +43,6 @@ class DingTalkSendMsg():
 
         start_num = 0
 
-        # user_ids = [
-        #     "163560584720757486",  # fenglepeng
-        #     # "061367526135489858",   # zhaohuatao
-        #     "062541521921189223"    # liuchengjian
-        #     # "225315361139140174"    # gaoshenghan
-        # ]
-
         print(len(user_ids), user_ids)
 
         while start_num < len(user_ids):
@@ -87,14 +80,7 @@ class DingTalkSendMsg():
 
                 if user_dingtalk.get(owner):
                     # print(owner, user_dingtalk.get(owner))
-                    test = """
-![](https://owncloud.megvii-inc.com/index.php/apps/files_sharing/ajax/publicpreview.php?x=1367&y=387&a=true&file=%25E6%259C%25AA%25E6%25A0%2587%25E8%25AE%25B0%25E7%259A%2584bucket.png&t=w2JFk4KE7rTO4pD&scalingup=0)
-您名下有bucket未标记数据密级，请前往[DSP](https://dsp.megvii-inc.com/app/bucket/myBucket)(Data Security Platform)上手动标记，数据密级请参考[OSS数据安全制度](https://discourse.brainpp.cn/t/topic/48491)中的常见数据分级，不可随意或者故意标低密级。  \n  
-
-{}
-
-[更多疑问>>>](https://wiki.megvii-inc.com/x/gwJtFw)
-                    """.format(bucket_str)
+                    test = """aaaaaaaaa""".format(bucket_str)
                     # print(test)
                     self.send_msg([user_dingtalk.get(owner)], test)
                 else:
@@ -120,14 +106,7 @@ class DingTalkSendMsg():
 
                 if user_dingtalk.get(owner):
                     print(owner, user_dingtalk.get(owner))
-                    test = """
-![](https://owncloud.megvii-inc.com/index.php/apps/files_sharing/ajax/publicpreview.php?x=1440&y=388&a=true&file=20220929113826.jpg&t=36DwKhQoEVq8SXG&scalingup=0)
-同学您好，您名下的高密级bucket授权了Users组的访问权限，权限分配范围过大，为了防止敏感数据泄露，请前往[Brainpp](https://www.brainpp.cn/hh-b/console/storage?type=oss)取消Users的权限分配，重新评估分享范围，权限分配应遵循最小化原则。如有疑问，请联系安全部刘程建。
-
-&nbsp;
-
-{}
-                    """.format(bucket_str)
+                    test = """bbbbbbbbb""".format(bucket_str)
                     self.send_msg([user_dingtalk.get(owner)], test)
                 else:
                     print("没有找到" + owner)
