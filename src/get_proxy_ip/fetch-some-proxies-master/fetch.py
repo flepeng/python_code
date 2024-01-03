@@ -393,7 +393,7 @@ if __name__ == "__main__":
     SQL_flag = True
     if SQL_flag:
         from utils.MySQL import MySQLLocal
-        from utils.op_ini import OPConfig
+        from utils.ini_util import OPConfig
 
         opc = OPConfig()
         user = opc.get_config("MySQL", "user")

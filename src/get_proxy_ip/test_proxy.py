@@ -84,8 +84,8 @@ timeout = TIMEOUT
 
 SQL_flag = True
 if SQL_flag:
-    from utils.MySQL import MySQLLocal
-    from utils.op_ini import OPConfig
+    from src.utils.MySQL import MySQLLocal
+    from src.utils.ini_util import OPConfig
 
     opc = OPConfig()
     user = opc.get_config("MySQL", "user")
