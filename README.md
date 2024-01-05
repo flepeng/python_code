@@ -1,25 +1,19 @@
 
-## 一些小工具
+## src 目录介绍
 
-- BDFS 基于百度网盘的虚拟文件系统 https://github.com/smallcham/bdfs 
+*   baiduyunpan。
+    百度云盘的一些脚本
 
-## DL
+*   DL。
+    机器学习和深度学习的一些脚本
 
-
-## src
-
-### baiduyunpan
-
-百度云的一些小脚本
-
-
-### get_proxy_ip
+*   official_sample_code。
+    一些官方的代码示例
+    
+*   utils。
+    自己用的一些小工具
 
 
-## utils
+## 一些有意思的git
 
-
-## 原则
-
-- 工具分类
-- 每个模块如果需要工具直接把代码考过去，尽量减少模块依赖
+*   BDFS 基于百度网盘的虚拟文件系统 https://github.com/smallcham/bdfs 
