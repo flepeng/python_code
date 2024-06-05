@@ -1,25 +1,32 @@
+<h1 align="center">Python - Code</h1>
 
-## 一些小工具
+<p align="center">分享一些自用的 Python 小工具和代码 | Python Code</p>
 
-- BDFS 基于百度网盘的虚拟文件系统 https://github.com/smallcham/bdfs 
+***
 
-## DL
+# 项目介绍
 
-
-## src
-
-### baiduyunpan
-
-百度云的一些小脚本
+分享一些自用的 Python 小工具和代码。
 
 
-### get_proxy_ip
+## src 目录介绍
+
+*   baiduyunpan。
+    百度云盘的一些脚本
+
+*   dingtalk。
+    对接钉钉的一些脚本
+
+*   DL。
+    机器学习和深度学习的一些脚本
+
+*   official_sample_code。
+    一些官方的代码示例
+    
+*   utils。
+    自己用的一些小工具
 
 
-## utils
+## 一些有意思的git
 
-
-## 原则
-
-- 工具分类
-- 每个模块如果需要工具直接把代码考过去，尽量减少模块依赖
+*   BDFS 基于百度网盘的虚拟文件系统 https://github.com/smallcham/bdfs 
