@@ -7,7 +7,9 @@
 """
 import time
 import random
-from .generate_data_config import *
+import string
+from ipaddress import IPv4Network
+from generate_data_config import *
 
 insert_data = []
 
@@ -110,9 +112,48 @@ class GenerateId(object):
         return check_code_list[check_code]
 
 
+class GenerateEmail(object):
+    @classmethod
+    def generate(cls):
+        domain = ["@163.com", "@qq.com", "@gmail.com", "@mail.hk.com", "＠yahoo.co.id", "mail.com", "gmail.com", "yahoo.com", "hotmail.com", "outlook.com"]
+        username_length = random.randint(5, 10)
+
+        username = ''.join(random.choices(string.ascii_lowercase, k=username_length))
+        domain_name = random.choice(domain)
+        email = username + "@" + domain_name
+
+        return email
+
+
+class GenerateCardId():
+
+    @classmethod
+    def generate(cls):
+        card_id = '62'
+        for i in range(17):
+            tmp = str(random.randint(0,9))
+            card_id += tmp
+        return card_id
+
+
+class GenerateIP():
+
+    @classmethod
+    def generate(cls, ip_type="IPv4"):
+        if ip_type == "IPv4":
+            address = ".".join(str(random.randint(0, 255)) for _ in range(4))
+        elif ip_type == "IPv6":
+            address = ":".join(hex(random.randint(1, 65535))[2:] for _ in range(8))
+        else:
+            address = None
+        return address
+
+
 if __name__ == "__main__":
     start_time = time.time()
     age, birthday, identity = GenerateId.generate()
     insert_data.append((GenerateName.generate(), "123456", age, random.choice([1, 2]), birthday,GeneratePhoneNumber.generate(), identity))
     print(insert_data)
     print(time.time()-start_time)
+    print(GenerateCardId().generate())
+    print(GenerateIP().generate())
