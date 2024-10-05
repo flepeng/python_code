@@ -29,14 +29,14 @@ class SendMail(object):
     smtp_sender_password = "xxxxxx"
 
     def __init__(
-        self,
-        smtp_receiver="",
-        smtp_receiver_default=[],
-        smtp_cc=[],
-        smtp_subject="",
-        smtp_appendix_list="",
-        smtp_body="默认内容",
-        body_image_list=""
+            self,
+            smtp_receiver: str = "",
+            smtp_receiver_default: list = None,
+            smtp_cc: list = None,
+            smtp_subject: str = "",
+            smtp_appendix_list: str = "",
+            smtp_body: str = "默认内容",
+            body_image_list: list = None
     ):
         self.msg = None
 

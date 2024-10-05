@@ -12,12 +12,12 @@ from flask import render_template
 
 
 class OutlookHtml(object):
-    def __init__(self, submit_uuid, s_type):
+    def __init__(self, submit_uuid: str, s_type: str):
         self.submit_uuid = submit_uuid
         self.s_type = s_type
         self.msgImage_list = []
 
-    def handle_image(self, handle_str, image_num):
+    def handle_image(self, handle_str: str, image_num: int):
         if self.s_type != 'email':
             return handle_str, image_num
 

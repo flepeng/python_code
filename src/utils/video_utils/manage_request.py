@@ -35,7 +35,7 @@ cmd_ffmpeg_cut = ffmpeg + """ -allowed_extensions ALL -protocol_whitelist "file,
 logger = logging.getLogger(__name__)
 
 
-class MySQLLocal(object):
+class MySQL(object):
 
     def __init__(self, host, port, user, passwd, db):
         self.conn = pymysql.connect(
@@ -141,7 +141,7 @@ port = opc.get_config("MySQL_T", "port")
 host = opc.get_config("MySQL_T", "host")
 passwd = opc.get_config("MySQL_T", "passwd")
 db = opc.get_config("MySQL_T", "db")
-mysql = MySQLLocal(host, port, user, passwd, db)
+mysql = MySQL(host, port, user, passwd, db)
 
 
 def zip_encrypt(old_file_name, new_file_name, passwd="Pass"):

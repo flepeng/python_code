@@ -10,7 +10,7 @@ logger = logging.getLogger()
 logger.setLevel(logging.DEBUG)
 
 
-class MySQLLocal(object):
+class MySQL(object):
 
     def __init__(self, host, port, user, passwd, db):
         self.conn = pymysql.connect(
@@ -99,7 +99,7 @@ def get_url_list():
     host = "81.70.160.146"
     passwd = "cavWib-pamwyc-6kotro"
     db = "lp"
-    mysql = MySQLLocal(host, port, user, passwd, db)
+    mysql = MySQL(host, port, user, passwd, db)
     ret_sql = mysql.select("select url from csdn")
     for i in ret_sql:
         url_list[i[0]] = 1

@@ -11,9 +11,9 @@ import pymysql
 logger = logging.getLogger()
 
 
-class MySQLLocal(object):
+class MySQL(object):
 
-    def __init__(self, host, port, user, passwd, db):
+    def __init__(self, host: str, port: int, user: str, passwd: str, db: str):
         self.conn = pymysql.connect(
             host=host,
             port=int(port),
@@ -24,12 +24,12 @@ class MySQLLocal(object):
             # autocommit=True  # autocommit=True，自动提交事务(推荐使用)
         )
 
-    def select(self, sql, sql_parameter=None):
+    def select(self, sql: str, data: tuple = None) -> tuple:
         cursor = None
         try:
             self.conn.ping(reconnect=True)
             cursor = self.conn.cursor()
-            cursor.execute(sql, sql_parameter)
+            cursor.execute(sql, data)
             data = cursor.fetchall()
             cursor.close()
             self.conn.commit()  # 记得提交事务，否则会查询不到新的数据。
@@ -42,7 +42,7 @@ class MySQLLocal(object):
             if cursor is not None:
                 cursor.close()
 
-    def exec_sql(self, sql, data=None):
+    def exec_sql(self, sql: str, data: tuple = None):
         cursor = None
         try:
             self.conn.ping(reconnect=True)
@@ -60,19 +60,19 @@ class MySQLLocal(object):
             if cursor is not None:
                 cursor.close()
 
-    def update(self, sql, data=None):
+    def update(self, sql: str, data: tuple = None):
         return self.exec_sql(sql, data)
 
-    def insert(self, sql, data=None):
+    def insert(self, sql: str, data: tuple = None):
         return self.exec_sql(sql, data)
 
-    def delete(self, sql, data=None):
+    def delete(self, sql: str, data: tuple = None):
         return self.exec_sql(sql, data)
 
-    def truncate_table(self, sql=None, data=None):
+    def truncate_table(self, sql: str, data: tuple = None):
         return self.exec_sql(sql, data)
 
-    def insert_many_items(self, sql=None, data=None):
+    def insert_many_items(self, sql: str, data: tuple = None):
         cursor = None
 
         try:
@@ -96,4 +96,4 @@ class MySQLLocal(object):
 
 
 if __name__ == '__main__':
-    mysql = MySQLLocal("127.0.0.1", 3306, "root", "1234", "test")
+    mysql = MySQL("127.0.0.1", 3306, "root", "1234", "test")

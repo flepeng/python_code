@@ -7,7 +7,7 @@
 """
 import json
 
-from src.utils.mysql_util import MySQLLocal
+from src.utils.mysql_util import MySQL
 from src.utils.dingtalk.official.rebot import BatchSendOTO
 from src.utils.dingtalk.myself import ding_talk_base
 
@@ -19,7 +19,7 @@ def read_xlsx():
     ret = data["账号"].values
     user_list = [i for i in ret]
     sql = "select dingding_id from company_dingding where user_code in {}".format(tuple(user_list))
-    ret = MySQLLocal().select(sql)
+    ret = MySQL().select(sql)
     ret = [i[0] for i in ret]
     return ret
 
@@ -31,7 +31,7 @@ def get_all_user_dingtalk():
 left join company_dingding b on a.userCode=b.user_code
 where a.status='1' and b.dingding_id is not NULL and dingding_id != ''
     """
-    ret = MySQLLocal().select(sql)
+    ret = MySQL().select(sql)
     for i in ret:
         dict_user_dingtalk[i[0]] = i[1]
     return dict_user_dingtalk

@@ -25,10 +25,10 @@ class Awvs(object):
         self.scan_id = ''
         self.session_id = ''
 
-    def build_url(self, url=None, sub_url=None):
+    def build_url(self, url: str = None, sub_url: str = None) -> str:
         return '{0}{1}'.format(url, sub_url)
 
-    def connect(self, method=None, sub_url=None, data=None):
+    def connect(self, method: str = None, sub_url: str = None, data: str = None) -> str:
         """
             该模块用来定制连接
         """
@@ -67,7 +67,7 @@ class Awvs(object):
         else:
             return r.json()
 
-    def connect_all(self, method=None, sub_url=None, data=None):
+    def connect_all(self, method: str = None, sub_url: str = None, data: str = None) -> str:
         """
             该模块用来定制连接
         """
@@ -95,7 +95,7 @@ class Awvs(object):
             return e
         return r
 
-    def add_target(self, address=None, description=None):
+    def add_target(self, address: str = None, description: str = None) -> str:
         scan = {
             'address': address,
             'description': description,
@@ -111,7 +111,7 @@ class Awvs(object):
             print(e)
             return 'error'
 
-    def start_job(self, target_id=None):
+    def start_job(self, target_id: str = None):
         """
             11111111-1111-1111-1111-111111111112    High Risk Vulnerabilities
             11111111-1111-1111-1111-111111111115    Weak Passwords
@@ -157,7 +157,7 @@ class Awvs(object):
         scans = self.connect('GET', '/api/v1/scans')
         return scans
 
-    def get_specify_scan_id(self, target_id=''):
+    def get_specify_scan_id(self, target_id: str = None):
         # 根据target_id 匹配 最新的扫描id
         target_id = target_id if target_id else self.target_id
         scans = self.get_all_scans()
@@ -168,7 +168,7 @@ class Awvs(object):
                 return self.scan_id
         return self.scan_id
 
-    def get_specify_scan_status(self, scan_id=''):
+    def get_specify_scan_status(self, scan_id: str = None):
         # 根据 scan_id 获取当前状态 状态类型：queued：队列中 processing：运行中 aborted：禁止 completed：完成 scheduled
 
         scan_id = scan_id if scan_id else self.scan_id
@@ -220,29 +220,29 @@ class Awvs(object):
         status = data.get('current_session').get('status')
         return status
 
-    def get_specify_scan_sessionid(self, scan_id=''):
+    def get_specify_scan_sessionid(self, scan_id: str = None):
         # 根据 scan_id 获取 session_id
         scan_id = scan_id if scan_id else self.scan_id
         data = self.connect('GET', '/api/v1/scans/{0}'.format(scan_id))
         self.session_id = data['current_session']['scan_session_id']
         return self.session_id
 
-    def delete_specify_scan(self, scan_id):
+    def delete_specify_scan(self, scan_id: str = None):
         # 根据 scan_id 删除扫描
         data = self.connect('DELETE', '/api/v1/targets/{0}'.format(scan_id))
         return data
 
-    def stop_specify_scan(self, scan_id):
+    def stop_specify_scan(self, scan_id: str = None):
         # 根据 scan_id 停止扫描
         data = self.connect('POST', '/api/v1/scans/{0}/abort'.format(scan_id))
         return data
 
-    def get_statistics(self, scan_id, scan_session_id):
+    def get_statistics(self, scan_id: str = None, scan_session_id: str = None):
         # 根据 session_id 获取扫描状态信息
         data = self.connect('GET', '/api/v1/scans/{0}/results/{1}/statistics'.format(scan_id, scan_session_id))
         return data
 
-    def get_specify_scan_vulns(self, scan_id, scan_session_id):
+    def get_specify_scan_vulns(self, scan_id: str = None, scan_session_id: str = None):
         # 根据 session_id 获取所有检测出的Item, 包括高危、中危、低危等
         """
             {u'vulnerabilities': [
@@ -278,7 +278,7 @@ class Awvs(object):
         data = self.connect('GET', '/api/v1/scans/{0}/results/{1}/vulnerabilities'.format(scan_id, scan_session_id))
         return data
 
-    def get_specify_scan_specify_vulns(self, scan_id, scan_session_id, vuln_id):
+    def get_specify_scan_specify_vulns(self, scan_id: str = None, scan_session_id: str = None, vuln_id: str = None):
         # 根据 vulnerable id 获取具体信息
         """
         {
@@ -316,7 +316,7 @@ class Awvs(object):
                             '/api/v1/scans/{}/results/{}/vulnerabilities/{}'.format(scan_id, scan_session_id, vuln_id))
         return data
 
-    def make_report(self, scan_id):
+    def make_report(self, scan_id: str = None):
         """
             11111111-1111-1111-1111-111111111111    Developer
             21111111-1111-1111-1111-111111111111    XML
@@ -365,7 +365,7 @@ class Awvs(object):
         """
         return response
 
-    def get_specify_report(self, scan_id):
+    def get_specify_report(self, scan_id: str = None):
 
         ret = self.get_all_report()
         for i in ret['reports']:
@@ -390,7 +390,7 @@ class Awvs(object):
         """
         return False
 
-    def configure(self, target_id, cookie, url):
+    def configure(self, target_id: str = None, cookie: str = None, url: str = None):
         """ 高级设置 """
         conf = {
             'custom_cookies': [{  # 自定义cookie
@@ -403,7 +403,8 @@ class Awvs(object):
             data = self.start_job(target_id)
         return data
 
-    def site_login(self, target_id, user, password, cookie='', url=''):
+    def site_login(self, target_id: str = None, user: str = None, password: str = None, cookie: str = None,
+                   url: str = None):
         # 登录
         conf = {
             'login': {
@@ -421,7 +422,8 @@ class Awvs(object):
             data = self.configure(target_id, cookie, url)
         return data
 
-    def crawling(self, target_id, user, password, cookie, url, agent, exclude_url):
+    def crawling(self, target_id: str = None, user: str = None, password: str = None, cookie: str = None,
+                 url: str = None, agent: str = None, exclude_url: str = None):
         conf = {
             "limit_crawler_scope": 'true',
             "case_sensitive": "no",
@@ -435,7 +437,7 @@ class Awvs(object):
             data = self.site_login(target_id, user, password, cookie, url)
         return data
 
-    def advanced(self, target_id):
+    def advanced(self, target_id: str = None):
         conf = {
             "issue_tracker_id": "",
             "technologies": ["ASP", "ASP.NET"],
@@ -450,7 +452,7 @@ class Awvs(object):
         return data
 
 
-def factory_scan(url, user='', password=''):
+def factory_scan(url, user: str = None, password: str = None):
     awvs = Awvs()
     target_id = awvs.add_target(url, 'vms scan')  # '0bb03c60-4946-42fc-8687-669cd161c523'
 

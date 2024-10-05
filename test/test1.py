@@ -1,5 +1,5 @@
 import random
-
+import test.get_web_url
 columns = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18]
 
 batch = 1000
@@ -16,3 +16,5 @@ for j in range(17, 0, -1):
             num += 1
     print(num / batch)
 
+ret = getattr(test.get_web_url, "soup")
+print(ret)

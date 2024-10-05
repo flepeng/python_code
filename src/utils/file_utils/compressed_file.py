@@ -3,7 +3,7 @@
     @Time  : 2022/3/29  11:30
     @Author: Feng Lepeng
     @File  : compressed_files.py
-    @Desc  : 压缩文件脚本
+    @Desc  : 压缩文件
 """
 import os
 import platform
@@ -12,7 +12,7 @@ WinRAR_exe_path = """C:\"Program Files"\\WinRAR\\WinRAR.exe
 """
 
 
-def compressed(rar_path, compressed_path, password):
+def compressed(rar_path: str = None, compressed_path: str = None, password: str = None):
     """
     加密压缩
     调用压缩成ZIP的CMD命令同RAR，只是输出路径不同，需将后缀改为.zip

@@ -58,6 +58,7 @@ def get_header():
         "Opera/9.80 (Macintosh; Intel Mac OS X 10.6.8; U; en) Presto/2.8.131 Version/11.11",  # Opera 11.11 – MAC
         "Opera/9.80 (Windows NT 6.1; U; en) Presto/2.8.131 Version/11.11"  # Opera 11.11 – Windows
     ]
+
     referer_list = [
         'http://www.baidu.com/',
     ]
@@ -70,4 +71,5 @@ def get_header():
         'Accept-Language': 'zh-CN,zh;q=0.9,en-CN;q=0.8,en;q=0.7',
         'Accept-Encoding': 'gzip, deflate, br',
     }
+
     return header

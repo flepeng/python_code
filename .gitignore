@@ -13,6 +13,7 @@ htmlcov/
 mutmut.xml
 *.test
 dev.py
+test/test/
 
 .pytype_output
 

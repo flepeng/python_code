@@ -3,14 +3,14 @@
     @Time  : 2022/3/29  11:29
     @Author: Feng Lepeng
     @File  : alert_file.py
-    @Desc  : 将文件中替换之后的字符串写到一个新的文件中，然后将原文件删除，新文件改为原来文件的名字
+    @Desc  :
 """
 import os
 
 
-def alter(file, old_str, new_str):
+def alter(file: str = None, old_str: str = None, new_str: str = None):
     """
-    将文件中替换之后的字符串写到一个新的文件中，然后将原文件删除，新文件改为原来文件的名字
+    遍历文件中的行并进行替换，然后写到一个新文件中，然后将原文件删除，新文件改为原来文件的名字
     :param file: 文件路径
     :param old_str: 需要替换的字符串
     :param new_str: 替换的字符串

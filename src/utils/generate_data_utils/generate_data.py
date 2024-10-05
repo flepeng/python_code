@@ -9,7 +9,7 @@ import time
 import random
 import string
 from ipaddress import IPv4Network
-from generate_data_config import *
+from .generate_data_config import *
 
 insert_data = []
 
