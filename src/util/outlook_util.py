@@ -34,7 +34,6 @@ class OutlookHtml(object):
 
     def create(self):
         """
-        所有的漏洞
         :return:
         """
         render_dict = {}
